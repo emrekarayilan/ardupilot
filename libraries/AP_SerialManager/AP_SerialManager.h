@@ -115,6 +115,11 @@
 #define AP_SERIALMANAGER_MSP_BUFSIZE_TX     256
 #define AP_SERIALMANAGER_MSP_BAUD           115200
 
+// Baudrate and Buffer sizes for ReadUart Class
+#define AP_SERIALMANAGER_ReadUart_BUFSIZE_RX     256
+#define AP_SERIALMANAGER_ReadUart_BUFSIZE_TX     16
+#define AP_SERIALMANAGER_ReadUart_BAUD           9600
+
 class AP_SerialManager {
 public:
     AP_SerialManager();
@@ -170,6 +175,7 @@ public:
         SerialProtocol_MAVLinkHL = 43,
         SerialProtocol_Tramp = 44,
         SerialProtocol_DDS_XRCE = 45,
+        SerialProtocol_ReadUart = 46,
         SerialProtocol_NumProtocols                    // must be the last value
     };
 

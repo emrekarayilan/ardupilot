@@ -524,7 +524,12 @@ void AP_SerialManager::init()
                     uart->set_flow_control(AP_HAL::UARTDriver::FLOW_CONTROL_DISABLE);
                     // Note init is handled by AP_MSP
                     break;
-#endif
+#endif          
+                case SerialProtocol_ReadUart:
+                    uart->begin(state[i].baudrate(),
+                                         AP_SERIALMANAGER_ReadUart_BUFSIZE_RX,
+                                         AP_SERIALMANAGER_ReadUart_BUFSIZE_TX);
+                    break;
                 default:
                     uart->begin(state[i].baudrate());
             }
