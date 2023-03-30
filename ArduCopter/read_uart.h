@@ -11,8 +11,7 @@ class ReadUart {
 
 public:
 
-    static void setup_uart(AP_HAL::UARTDriver *uart, const char *name);
-    static void setup(void);
+
     static void test_uart(AP_HAL::UARTDriver *uart, const char *name);
     static void run(void);
 
