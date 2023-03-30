@@ -72,6 +72,7 @@
 #include <AC_PrecLand/AC_PrecLand_config.h>
 #include <AP_OpticalFlow/AP_OpticalFlow.h>
 #include <AP_Winch/AP_Winch_config.h>
+#include "read_uart.h"
 
 // Configuration
 #include "defines.h"
@@ -188,6 +189,7 @@ public:
     friend class Parameters;
     friend class ParametersG2;
     friend class AP_Avoidance_Copter;
+    friend class ReadUart;
 
 #if ADVANCED_FAILSAFE == ENABLED
     friend class AP_AdvancedFailsafe_Copter;

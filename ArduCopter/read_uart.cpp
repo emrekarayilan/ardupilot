@@ -3,20 +3,19 @@
  */
 
 #include <AP_HAL/AP_HAL.h>
-
+#include "read_uart.h"
 #if HAL_OS_POSIX_IO
 #include <stdio.h>
 #endif
 
-void setup();
-void loop();
 
-const AP_HAL::HAL& hal = AP_HAL::get_HAL();
+//const AP_HAL::HAL& hal = AP_HAL::get_HAL();
+extern const AP_HAL::HAL &hal;
 
 /*
   setup one UART at 57600
  */
-static void setup_uart(AP_HAL::UARTDriver *uart, const char *name)
+void ReadUart::setup_uart(AP_HAL::UARTDriver *uart, const char *name)
 {
     if (uart == nullptr) {
         // that UART doesn't exist on this platform
@@ -26,7 +25,7 @@ static void setup_uart(AP_HAL::UARTDriver *uart, const char *name)
 }
 
 
-void setup(void)
+void ReadUart::setup(void)
 {
     /*
       start all UARTs at 57600 with default buffer sizes
@@ -43,14 +42,14 @@ void setup(void)
     
 }
 
-static void test_uart(AP_HAL::UARTDriver *uart, const char *name)
+void ReadUart::test_uart(AP_HAL::UARTDriver *uart, const char *name)
 {   const char* str = nullptr;
     if (uart == nullptr) {
         // that UART doesn't exist on this platform
         return;
     }
-    uart->printf("Hello on UART %s at %.3f seconds\n",
-                 name, (double)(AP_HAL::millis() * 0.001f));
+//    uart->printf("Hello on UART %s at %.3f seconds\n",
+//                 name, (double)(AP_HAL::millis() * 0.001f));
 
     while (hal.serial(4)->available() > 0) {
         char c = hal.serial(4)->read();
@@ -58,13 +57,14 @@ static void test_uart(AP_HAL::UARTDriver *uart, const char *name)
         
         str = str + c ;
     }
-    uart->printf("Char from uart %s at %.3f seconds\n",
-                 str, (double)(AP_HAL::millis() * 0.001f));
+    //uart->printf("String from serial 4 --->  %s at %.3f seconds\n",
+                // str, (double)(AP_HAL::millis() * 0.001f));
     
 }
 
-void loop(void)
-{
+void ReadUart::run(void)
+{   
+    //hal.serial(0)->printf("rundayim");
     test_uart(hal.serial(0), "SERIAL0");
     test_uart(hal.serial(1), "SERIAL1");
     test_uart(hal.serial(2), "SERIAL2");
@@ -77,9 +77,9 @@ void loop(void)
     ::printf("Hello on debug console at %.3f seconds\n", (double)(AP_HAL::millis() * 0.001f));
 #endif
 
-    hal.scheduler->delay(1000);
+   // hal.scheduler->delay(1000);
 }
 
-AP_HAL_MAIN();
+
 
 
