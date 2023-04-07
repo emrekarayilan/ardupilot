@@ -4,6 +4,8 @@
 
 #include <AP_HAL/AP_HAL.h>
 #include "read_uart.h"
+#include "TinyGPSPlus.h"
+#include "TinyGPS++.h"
 #if HAL_OS_POSIX_IO
 #include <stdio.h>
 #endif
@@ -11,6 +13,7 @@
 
 //const AP_HAL::HAL& hal = AP_HAL::get_HAL();
 extern const AP_HAL::HAL &hal;
+TinyGPSPlus my_beacon;
 
 /*
   setup one UART at 57600
@@ -29,12 +32,18 @@ void ReadUart::test_uart(AP_HAL::UARTDriver *uart, const char *name)
     while (hal.serial(4)->available() > 0) {
         char c = hal.serial(4)->read();
         hal.console->write(c);
+        my_beacon.encode(c);
+
+        
+
         
         str = str + c ;
     }
     //uart->printf("String from serial 4 --->  %s at %.3f seconds\n",
                 // str, (double)(AP_HAL::millis() * 0.001f));
-    
+    hal.serial(0)->printf("Time status-> %d date-> %d Location Stat-> %d Lat-> %f Lng-> %f \n"
+        ,my_beacon.time.isValid(),my_beacon.time.second(),my_beacon.location.isValid(),
+        my_beacon.location.lat(),my_beacon.location.lng());
 }
 
 void ReadUart::run(void)
