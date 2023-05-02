@@ -654,6 +654,9 @@ public:
 #if MODE_GUIDED_ENABLED == ENABLED
     AP_Int32 guided_options;
 #endif
+#if MODE_MP_ENABLED == ENABLED
+    AP_Int32 mp_options;
+#endif
 
     AP_Float fs_gcs_timeout;
 
@@ -669,6 +672,9 @@ public:
 
 #if MODE_GUIDED_ENABLED == ENABLED
     AP_Float guided_timeout;
+#endif
+#if MODE_MP_ENABLED == ENABLED
+    AP_Float mp_timeout;
 #endif
 
     AP_Int8                 surftrak_mode;

@@ -51,6 +51,12 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
             break;
 #endif
 
+#if MODE_MP_ENABLED == ENABLED
+        case Mode::Number::MP:
+            ret = &mode_mp;
+            break;
+#endif
+
 #if MODE_CIRCLE_ENABLED == ENABLED
         case Mode::Number::CIRCLE:
             ret = &mode_circle;

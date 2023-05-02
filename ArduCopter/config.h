@@ -161,7 +161,11 @@
 #ifndef MODE_AUTO_ENABLED
 # define MODE_AUTO_ENABLED ENABLED
 #endif
-
+//////////////////////////////////////////////////////////////////////////////
+// Moving platform 
+#ifndef MODE_MP_ENABLED
+# define MODE_MP_ENABLED ENABLED
+#endif
 //////////////////////////////////////////////////////////////////////////////
 // Brake mode - bring vehicle to stop
 #ifndef MODE_BRAKE_ENABLED
